@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 1) Programa una función que cuente el número de caracteres de una cadena de texto, pe. miFuncion("Hola Mundo") devolverá 10.
+        // const cuentaCaracteres = (cadena) => {
+        //     const numeroCaracteres =  typeof cadena == "string"? cadena.length : "Error: entrada inválida, ha de ser una cadena de texto";
+        //     return numeroCaracteres;
+        // }
+
+        // console.log(cuentaCaracteres());
+        // console.log(cuentaCaracteres("cadena de prueba"));
+
+        // Resuelto
+        const cuentaCaracteres = (cadena = "") =>  
+            (!cadena)
+            ? console.warn(`Error: entrada invalida, ha de ser una cadena de texto`)
+            : console.info(`La cadena "${cadena}" tiene "${cadena.length}" caracteres`) 
+
+        cuentaCaracteres();
+        cuentaCaracteres("Hola Mundo");
+        // *************************************************************************************************************************************
+
+        // 2) Programa una función que te devuelva el texto recortado según el número de caracteres indicados, pe. miFuncion("Hola Mundo", 4) devolverá "Hola".
+        // const recortaCadena = (cadena, numeroCaracteres) => {
+        //     const cadenaResultado = typeof cadena == "string"? cadena.substring(0,numeroCaracteres) : "Error: entrada inválida, ha de ser una cadena de texto";
+        //     return cadenaResultado;
+        // }
+
+        // console.log(recortaCadena("Hola Mundo",6))
+
+        // Resuelto
+        const recortaCadena = (cadena = "", numeroCaracteres = undefined) =>  
+            (!cadena)
+            ? console.warn(`Error: entrada invalida, ha de ser una cadena de texto`)
+            : (numeroCaracteres === undefined)
+            ? console.warn(`Error: no ingresaste la longitud de recorte`)
+            : console.info(cadena.slice(0,numeroCaracteres)) ;
+
+        recortaCadena();
+        recortaCadena("Hola Mundo",5);
+        recortaCadena("",5);
+        recortaCadena("Hola Mundo");
+        // *************************************************************************************************************************************
+
+        // 3) Programa una función que dada una String te devuelva un Array de textos separados por cierto caracter, pe. miFuncion('hola que tal', ' ') devolverá ['hola', 'que', 'tal'].
+        // const vectorDesdeCadena = (cadena, caracterSeparador) => {
+        //     const cadenaResultado = typeof cadena == "string"? cadena.split(caracterSeparador) : "Error: entrada inválida, ha de ser una cadena de texto";
+        //     return cadenaResultado;
+        // }
+
+        // console.log(vectorDesdeCadena("Hola Mundo Cruel"," "))
+
+        // Resuelto
+        const vectorDesdeCadena = (cadena = "", caracterSeparador = undefined) =>  
+            (!cadena)
+            ? console.warn(`Error: entrada invalida, ha de ser una cadena de texto`)
+            : (caracterSeparador === undefined)
+            ? console.warn(`Error: no ingresaste el caracter separador`)
+            : console.info(cadena.slice(0,caracterSeparador)) ;
+
+        vectorDesdeCadena();
+        vectorDesdeCadena("Hola Mundo Cruel"," ");
+
+        // *************************************************************************************************************************************
+
+        // 4) Programa una función que repita un texto X veces, pe. miFuncion('Hola Mundo', 3) devolverá Hola Mundo Hola Mundo Hola Mundo.
+
+        // const repiteCadena = (cadena, numeroRepeticiones) => {
+        //     const cadenaResultado = typeof cadena == "string"? cadena.repeat(numeroRepeticiones) : "Error: entrada inválida, ha de ser una cadena de texto";
+        //     return cadenaResultado;
+        // }
+
+        // console.log(repiteCadena("Hola Mundo ",3))
+
+        // Resuelto
+        const repiteCadena = (cadena = "", numeroRepeticiones = undefined) => {
+            if(!cadena) return console.warn("No ingresaste un texto");
+            if(numeroRepeticiones === undefined) return console.warn("No ingresaste el número de veces a repetir el texto");
+            if(numeroRepeticiones === 0) return console.error("Repetir 0 veces no tiene sentido");
+            if(Math.sign(numeroRepeticiones) === -1) return console.error("El número de veces no puede ser negativo");
+
+            for(let i=1; i<=numeroRepeticiones; i++) console.info(`${cadena} -> ${i}`);
+        }    
+        
+        repiteCadena("Hola Mundo ",5);
+        repiteCadena("Hola Mundo ");
+        repiteCadena("",5);
+        repiteCadena("Hola Mundo ",0);
+        repiteCadena("Hola Mundo ",-4);
+        // *************************************************************************************************************************************
+
+    </script>
+</body>
+</html>
