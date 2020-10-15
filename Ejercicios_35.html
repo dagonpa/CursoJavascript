@@ -10,9 +10,119 @@
 <body>
     <script>
         //5) Programa una función que invierta las palabras de una cadena de texto, pe. miFuncion("Hola Mundo") devolverá "odnuM aloH".
+        const invierteCadena = (cadena = "") =>
+            (!cadena)
+                ? console.warn("Ha de ingresarse una cadena") 
+                : console.info(cadena.split("").reverse().join(""))
+
+        invierteCadena();
+        invierteCadena("Hola Mundo");
+
+        // Resuelto
+
+            // -- igual, lo he clavado --
+        
         // 6) Programa una función para contar el número de veces que se repite una palabra en un texto largo, pe. miFuncion("hola mundo adios mundo", "mundo") devolverá 2.
+        const cuentaRepetidos = (cadena = "", palabra = "") => {
+            if (!cadena || !palabra) return console.warn("Han de indicarse una cadena, y una palabra a buscar");
+            
+            let veces = 0;
+            let posicion = cadena.toUpperCase().indexOf(palabra.toUpperCase());
+            while (posicion!=-1) {
+                if (cadena.toUpperCase().indexOf(palabra.toUpperCase(),posicion)!=-1) veces ++;
+                posicion = cadena.toUpperCase().indexOf(palabra.toUpperCase(),posicion+1);
+            }
+            console.info(`La palabra "${palabra}" se encuentra "${veces}" veces en la cadena`);
+        }
+
+        cuentaRepetidos("");
+        cuentaRepetidos("Hola Mundo Cruel Hola Mundo","Mundo");
+
+        // Resuelto
+
+        const cuentaRepetidos2 = (cadena = "", palabra = "") => {
+            if (!cadena) return console.warn("Ha de indicarse una cadena");
+            if (!palabra) return console.warn("Ha de indicarse una palabra a buscar");
+            
+            let posicion = 0;
+            let veces = 0;
+            while (posicion!==-1) {
+                posicion = cadena.indexOf(palabra,posicion);
+                if (posicion!==-1){
+                    posicion ++
+                    veces ++
+                }
+            }
+            console.info(`La palabra "${palabra}" se encuentra "${veces}" veces en la cadena`);
+        }
+
+        cuentaRepetidos2("");
+        cuentaRepetidos2("Hola Mundo Cruel Hola Mundo","Mundo");
+
+
         // 7) Programa una función que valide si una palabra o frase dada, es un palíndromo (que se lee igual en un sentido que en otro), pe. mifuncion("Salas") devolverá true.
+        const invierteCadenas = (cadena = "") =>
+            (!cadena)
+                ? console.warn("Ha de ingresarse una cadena") 
+                : cadena.split("").reverse().join("")
+
+        const esPalindromo = (cadena = undefined) => 
+            (!cadena)
+                ? console.warn("Ha de indicarse una cadena")
+                : console.info(invierteCadenas(cadena.toUpperCase()) === cadena.toUpperCase())
+
+        esPalindromo();
+        esPalindromo("Salas salas");
+        esPalindromo("Salas");
+        esPalindromo("Perdigón");
+
+        // Resuelto
+        const esPalindromo2 = (cadena = "") => {
+            if (!cadena) return console.warn("Ha de indicarse una cadena");
+
+            cadena = cadena.toLowerCase();
+            let cadenaInvertida = cadena.split("").reverse().join("");
+
+            return (cadena===cadenaInvertida)
+                ? console.info(`Sí es palíndromo, cadena original "${cadena}" cadena invertida "${cadenaInvertida}"`)
+                : console.info(`No es palíndromo, cadena original "${cadena}" cadena invertida "${cadenaInvertida}"`)
+        }
+
+        esPalindromo2("salas")
+        esPalindromo2("Hola Mundo")
+
+
         // 8) Programa una función que elimine cierto patrón de caracteres de un texto dado, pe. miFuncion("xyz1, xyz2, xyz3, xyz4 y xyz5", "xyz") devolverá  "1, 2, 3, 4 y 5.
+        const eliminaPatron = (cadena = "", patron = undefined) =>
+            (!cadena || !patron)
+                ? console.warn("Ha de ingresarse una cadena y un patron") 
+                : console.info(cadena.split(patron).join(""))
+
+        const eliminaPatron2 = (cadena = "", patron = undefined) => {
+            let expregular = new RegExp(patron,"ig");
+
+            (!cadena || !patron) 
+                ? console.warn("Ha de ingresarse una cadena y un patron") 
+                : console.info(cadena.replace(expregular,""))
+            
+        }        
+
+        eliminaPatron("xyz1, xyz2, xyz3, xyz4 y xyz5", "xyz")
+        eliminaPatron2("xyz1, xyz2, xyz3, xyz4 y xyz5", "xyz")
+
+        // Resuelto
+
+        const eliminaPatron3 = (cadena = "", patron = "") =>
+        (!cadena)
+            ? console.warn("No ingresaste texto")
+            : (!patron)
+                ? console.warn("No ingresaste patrón")
+                : console.info(cadena.replace(new RegExp(patron,"ig"),""))
+        
+        eliminaPatron3("xyz1, xyz2, xyz3, xyz4 y xyz5", "xyz")
+        eliminaPatron3("xyz1, xyz2, xyz3, xyz4 y xyz5", "[a-z]")
+        eliminaPatron3("Parece mentira que 5 no sea = 4", "[a-z]")
+
     </script>
 </body>
 
