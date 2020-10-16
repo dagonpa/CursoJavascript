@@ -10,12 +10,97 @@
 <body>
     <script>
         // 9) Programa una función que obtenga un numero aleatorio entre 501 y 600.
-        const aleatorioEntre501y600 = () => Math.random() * 100
+
+        const aleatorioEntre501y600 = () => console.info(Math.random() * 100 + 501)
 
         aleatorioEntre501y600();
-        
+
+        //Resuelto
+
+        const aleatorioEntre501y600_2 = () => console.info(Math.round(Math.random() * 100 + 501))
+
+        aleatorioEntre501y600_2();
+
         // 10) Programa una función que reciba un número y evalúe si es capicúa o no (que se lee igual en un sentido que en otro), pe. miFuncion(2002) devolverá true.
+
+        const capicua = (numero = 0) => {
+            if (!numero) return console.warn("Ha de introducirse un numero mayor que 0");
+            if (typeof numero != "number") return console.warn("Has de introducir un número");
+
+            (!numero) 
+            ? console.warn("Ha de introducirse un numero mayor que 0")
+            : (numero.toString().split("").reverse().join("") === numero.toString()) 
+                ? console.warn(`El número ${numero} es capicua`) 
+                : console.warn(`El número ${numero} NO es capicua`)
+        }
+
+        capicua();
+        capicua("palabra");
+        capicua("2002");
+        capicua(2002);
+        capicua(3520);
+
+        //Resultado
+
+        const capicua2 = (numero = 0) => {
+            if (!numero) return console.warn("Ha de introducirse un numero mayor que 0");
+            if (typeof numero != "number") return console.error("No has introducido un número");
+
+            (numero.toString().split("").reverse().join("") === numero.toString()) 
+            ? console.warn(`El número ${numero} es capicua`)
+            : console.warn(`El número ${numero} NO es capicua`)
+        }
+
+        capicua2();
+        capicua("palabra");
+        capicua("2002");
+        capicua(2002);
+        capicua(3520);
+        capicua(18.81);
+
         // 11) Programa una función que calcule el factorial de un número (El factorial de un entero positivo n, se define como el producto de todos los números enteros positivos desde 1 hasta n), pe. miFuncion(5) devolverá 120.
+
+        const factorial = (numero = 0) => {
+            if (!numero) return console.warn("Ha de introducirse un numero mayor que 0");
+            if (typeof numero != "number") return console.warn("Has  introducido un string, ha de introducirse un numero");
+
+            let acumula = 1
+            for (i = 1; i <= numero; i++) {
+                acumula = acumula * i
+            }
+
+            console.info(`El factorial de ${numero} es ${acumula}`);
+        }
+
+        factorial();
+        factorial(0);
+        factorial("palabra");
+        factorial(5);
+        factorial(10);
+
+        //Resultado
+        const factorial2 = (numero = undefined) => {
+            if (numero === undefined) return console.warn("Ha de introducirse un numero");
+            if (typeof numero != "number") return console.warn("Has  introducido un string, ha de introducirse un numero");
+            if (numero===0) return console.warn("No puede sacarse el factorial del valor 0");
+            if (Math.sign(numero)===-1) return console.warn("Ha de introducirse un numero positivo");
+            
+            let acumula = 1
+            for (let i = numero; i > 1; i--) {
+                acumula *= i
+            }
+
+            return console.info(`El factorial de ${numero} es ${acumula}`);
+        }
+
+        factorial2();
+        factorial2(0);
+        factorial2(-5);
+        factorial2("palabra");
+        factorial2(5);
+        factorial2(10);
+
+
     </script>
 </body>
 
