@@ -11,9 +11,119 @@
     <script>
         // 12) Programa una función que determine si un número es primo(aquel que solo es divisible por sí mismo y 1) o no,
         //     pe.miFuncion(7) devolverá true.
+        const esPrimo = (numero = 0) => {
+            if (numero === undefined) return console.warn("Ha de introducirse un numero");
+            if (typeof numero != "number") return console.warn("Has  introducido un string, ha de introducirse un numero");
+            if (numero===0) return console.warn("El número no puede ser 0");
+            if (numero===1) return console.warn("El número no puede ser 1");
+            if (Math.sign(numero)===-1) return console.warn("Ha de introducirse un numero positivo");   
+
+            let primo = true;
+            for (let i=numero-1; i>1; i--) {
+                if (numero % i == 0) primo = false;
+            }
+            
+            (primo)
+                ? console.info(`El número ${numero} sí es un número primo`)
+                : console.info(`El número ${numero} no es un número primo`)
+        }
+
+        esPrimo();
+        esPrimo("string");
+        esPrimo(7);
+        esPrimo(20);
+
+        //Resultado
+        const esPrimo2 = (numero = undefined) => {
+            if (numero === undefined) return console.warn("Ha de introducirse un numero");
+            if (typeof numero != "number") return console.warn("Has  introducido un string, ha de introducirse un numero");
+            if (numero===0) return console.warn("El número no puede ser 0");
+            if (numero===1) return console.warn("El número no puede ser 1");
+            if (Math.sign(numero)===-1) return console.warn("Ha de introducirse un numero positivo");   
+
+            let divisible = false;
+            for (let i=2; i<numero; i++) {
+                if (numero % i === 0) {
+                    divisible = true;
+                    break;
+                }
+            }
+            
+            (divisible)
+                ? console.info(`El número ${numero} no es un número primo`)
+                : console.info(`El número ${numero} sí es un número primo`)
+        }
+
+        esPrimo2();
+        esPrimo2("string");
+        esPrimo2(13);
+        esPrimo2(200);
+
+
         // 13) Programa una función que determine si un número es par o impar, pe.miFuncion(29) devolverá Impar.
-        // 14) Programa una función para convertir grados Celsius a Fahrenheit y viceversa, pe.miFuncion(0,
-        //     "C") devolverá 32° F.
+
+        const parImpar = (numero = 0) => {
+            if (!numero) return console.warn ("Ha de indicarse un número");
+            if (typeof numero !== "number") return console.warn ("Ha de indicarse un valor numérico");
+
+            (numero % 2 === 0)
+                ? console.info(`El número ${numero} es un número PAR`)
+                : console.info(`El número ${numero} es un número IMPAR`)
+        }
+
+        parImpar();
+        parImpar("string");
+        parImpar(15);
+        parImpar(20);
+
+        //Resultado
+        const numeroParImpar = (numero = undefined) => {
+            if (numero === undefined) return console.warn("Ha de introducirse un numero");
+            if (typeof numero != "number") return console.warn("Has  introducido un string, ha de introducirse un numero");
+
+            (numero % 2 === 0)
+                ? console.info(`El número ${numero} es un número PAR`)
+                : console.info(`El número ${numero} es un número IMPAR`)
+        }
+
+        numeroParImpar();
+        numeroParImpar("string");
+        numeroParImpar(13);
+        numeroParImpar(200);
+
+        // 14) Programa una función para convertir grados Celsius a Fahrenheit y viceversa, pe.miFuncion(0,"C") devolverá 32° F.
+
+        const celsiusFarenheit  = (grados = undefined, magnitudIngresada = "") => {
+            if (grados === undefined) return console.warn ("Ha de indicarse un número");
+            if (typeof grados !== "number") return console.warn ("Ha de indicarse un valor numérico");
+            if (magnitudIngresada!=="C" && magnitudIngresada!=="F") return console.warn ("El segundo valor ha de ser 'C' para transforma de Farenheit a Celsius, y 'F' para lo contrario");
+
+            (magnitudIngresada === "C")
+                ? console.info(`${grados}° C equivale a ${Math.round((grados * 9/5) + 32)}° F`)
+                : console.info(`${grados}° F equivale a ${Math.round((grados * 9/5) + 32)}° C`)
+        }
+
+        celsiusFarenheit(0, "C");
+        celsiusFarenheit(10, "F");
+
+        //Resultado
+        const convertirGrados  = (grados = undefined, unidad = "") => {
+            if (grados === undefined) return console.warn ("Ha de indicarse un número");
+            if (typeof grados !== "number") return console.warn ("Ha de indicarse un valor numérico");
+            if (unidad === undefined) return console.warn ("Ha de indicarse una unidad");
+            if (typeof unidad != "string") return console.warn("Has introducido un valor que no es una cadena de texto");
+            if (unidad.length !== 1 || !/(C|F)/i.test(unidad)) return console.warn("Valor de unidad no reconocido");
+
+            (unidad === "C")
+                ? console.info(`${grados}° C equivale a ${Math.round((grados * 9/5) + 32)}° F`)
+                : console.info(`${grados}° F equivale a ${Math.round((grados - 32) * 5/9)}° C`)
+
+        }
+
+        convertirGrados(0,"C");
+        convertirGrados(0,"p");
+        convertirGrados(32,"f");
+
     </script>
 </body>
 
