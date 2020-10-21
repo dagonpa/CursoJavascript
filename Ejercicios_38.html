@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+    // 15) Programa una función para convertir números de base binaria a decimal y viceversa, pe. miFuncion(100,2) devolverá 4 base 10.
+
+    const binarioDecimal = (numero = undefined, unidad = undefined) => {
+        if (unidad === undefined) return console.warn ("Ha de indicarse una unidad, decimal o binario");
+        if (typeof unidad != "number") return console.warn("Has introducido un valor que no es un numero");
+        if (!/(2|10)/.test(unidad)) return console.warn("Valor de unidad no reconocido. Ha de ser 2 o 10");
+
+        if (numero === undefined) return console.warn ("Ha de indicarse un número");
+        if (typeof numero !== "number") return console.warn ("Ha de indicarse un valor numérico");
+        if (unidad===2){
+            if (!/(1|0)/g.test(unidad)) return console.warn("Valor de numero no reconocido. Ha de ser 1 o 0");
+        } else {
+            if (!/(0-9)/g.test(unidad)) return console.warn("Valor de numero no reconocido. Ha de ser un valor decimal");
+        }
+        
+
+        if (unidad==2) {
+            // Binario a decimal
+            const vector = numero.toString().split("");
+
+            let sumatorio = 0;
+            for (let x = vector.length-1; x>=0; x--) {
+                if (vector[x]==1) {
+                    sumatorio += Math.pow(2,vector.length-1-x)
+                }
+            }
+            console.info(`El binario ${numero} corresponde al decimal  ${sumatorio}`);
+        }
+        else {
+            // Decimal a binario
+
+            //????
+        }
+    }
+    binarioDecimal(100,2);
+    binarioDecimal(100001,2);
+    binarioDecimal(4,10);
+
+    //Resultado
+    const binarioDecimal2 = (numero = undefined, base  = undefined) => { 
+        if (numero === undefined) return console.warn ("Ha de indicarse una unidad, decimal o binario");
+        if (typeof numero != "number") return console.warn("Has introducido un valor que no es un numero");
+        if (base === undefined) return console.warn ("Ha de indicarse una base, decimal o binario");
+        if (typeof base != "number") return console.warn("Has introducido una base que no es un numero");
+
+        if (base===2){
+            return console.info(`${numero} base binaria = ${parseInt(numero,base)} base decimal`);
+        } else if (base===10)  {
+            return console.info(`${numero} base decimal = ${numero.toString(2)} base binaria`);
+        } else {
+            return console.error('El tipo de base a convertir no es válido')
+        }
+    }
+    binarioDecimal2(100,2);
+    binarioDecimal2(4,10);
+
+
+
+    // 16) Programa una función que devuelva el monto final después de aplicar un descuento a una cantidad dada, pe. miFuncion(1000, 20) devolverá 800.
+    const descuento = (cantidad = 0, descuento = 0) => {
+        if (!cantidad) return console.warn ("Ha de indicarse una cantidad");
+        if (typeof cantidad != "number") return console.warn("Has introducido un valor que no es un numero");
+        if (!descuento) return console.warn ("Ha de indicarse una cantidad");
+        if (typeof descuento != "number") return console.warn("Has introducido un valor que no es un numero");
+        if (Math.sign(cantidad)===-1 || Math.sign(descuento)===-1) return console.warn("Ha de introducirse valores positivos");   
+        
+        console.info(`El importe ${cantidad} tras descontarle un ${descuento}% devuelve un resultado de ${cantidad - (cantidad*descuento/100)}`)
+
+    }
+    descuento(1000,20);
+    descuento(64,50);
+
+
+
+    //Resultado
+
+    //( similar, nada nuevo ni diferente )
+
+
+    // 17) Programa una función que dada una fecha válida determine cuantos años han pasado hasta el día de hoy, pe. miFuncion(new Date(1984,4,23)) devolverá 35 años (en 2020).
+    const diasDesde = (fecha = undefined) => {
+        if (!fecha) return console.warn ("Ha de indicarse una fecha");
+        if (typeof fecha != "object") return console.warn("Has introducido un valor que no es fecha");
+
+        const hoy = new Date();
+        console.info(`${hoy.getYear()-fecha.getYear()} años`);
+    }
+
+    diasDesde(new Date(1984,4,23));
+
+
+    //Resultado
+    const diasDesde2 = (fecha = undefined) => {
+        if (!fecha) return console.warn ("Ha de indicarse una fecha");
+        if (!(fecha instanceof Date)) return console.warn("Has introducido un valor que no es fecha");
+
+        let hoyMenosFecha = new Date().getTime() - fecha.getTime(),
+        aniosEnMs = 1000 * 60 * 60 * 24 * 365,
+        aniosHumanos = Math.floor(hoyMenosFecha/aniosEnMs)
+
+        return (Math.sign(aniosHumanos)=== -1)
+        ? console.info(`Faltan ${Math.abs(aniosHumanos)} años para el ${fecha.getFullYear()}`)
+        : (Math.sign(aniosHumanos)=== 1)
+            ? console.info(`Han pasado ${Math.abs(aniosHumanos)} años desde el ${fecha.getFullYear()}`)
+            : console.info(`No hay diferencia, estamos en el año actual.`)
+
+    }
+
+    diasDesde2();
+    diasDesde2("string");
+    diasDesde2(new Date(1984,4,23));
+    diasDesde2(new Date());
+
+
+    </script>
+</body>
+
+</html>
