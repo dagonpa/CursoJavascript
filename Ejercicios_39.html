@@ -7,14 +7,146 @@
 </head>
 <body>
     <script>
-        // 18) Programa una funci�n que dada una cadena de texto cuente el n�mero de vocales y consonantes, pe. miFuncion("Hola Mundo") devuelva Vocales: 4, Consonantes: 5.
+        // 18) Programa una función que dada una cadena de texto cuente el número de vocales y consonantes, pe. miFuncion("Hola Mundo") devuelva Vocales: 4, Consonantes: 5.
+        const vocalesConsonantes = (cadena = undefined) => {
+            if (!cadena) return console.warn("Has de introducir un valor.");
+            if (typeof cadena != "string") return console.warn("Has de introducir una cadena de texto.");
 
 
-        // 19) Programa una funci�n que valide que un texto sea un nombre v�lido, pe. miFuncion("Jonathan MirCha") devolver� verdadero.
+            const regExpVocales = /[aeiou]/gi;
+            const vocales = cadena.replace(" ","").match(regExpVocales).length;
+            const regExpConsonantes = /[^aeiou]/gi;
+            const consonantes = cadena.replace(" ","").match(regExpConsonantes).length;
+            
+            console.info(`Hay ${vocales} vocales y ${consonantes} consonantes`)
+        }
+
+        vocalesConsonantes();
+        vocalesConsonantes(5);
+        vocalesConsonantes("Hola Mundo");
+
+        //Respuesta
+        const vocalesConsonantes2 = (cadena = "") => {
+            if (!cadena) return console.warn("Has de introducir un valor.");
+            if (typeof cadena != "string") return console.warn("Has de introducir una cadena de texto.");
+
+            let vocales = 0, 
+            consonantes=0;
+
+            cadena = cadena.toLocaleLowerCase();
+
+            for (let letra of cadena) {
+                if (/[aeiouáéíóú]/.test(letra)) vocales++;
+                if (/[bcdfghjklmnñpqrstvwxyz]/.test(letra)) consonantes++;                
+            }
+
+            console.info({
+                cadena,
+                vocales,
+                consonantes
+            })
+        }
+
+        vocalesConsonantes2();
+        vocalesConsonantes2(5);
+        vocalesConsonantes2("Hola Mundo");
 
 
-        // 20) Programa una funci�n que valide que un texto sea un email v�lido, pe. miFuncion("jonmircha@gmail.com") devolver� verdadero.
+        // 19) Programa una función que valide que un texto sea un nombre válido, pe. miFuncion("Jonathan MirCha") devolverá verdadero.
+        const nombreValido = (cadena = "") => {
+            if (!cadena) return console.warn("Has de introducir un valor.");
+            if (typeof cadena != "string") return console.warn("Has de introducir una cadena de texto.");
 
+            const regNombreValido = /[A-Z][a-z]{1,} [A-Z][a-z]{1,}/;
+
+            (regNombreValido.test(cadena))
+            ? console.info(`La cadena ${cadena} sí es un nombre válido`)
+            : console.warn(`La cadena ${cadena} no es un nombre válido`);
+            
+            
+        }
+
+        nombreValido();
+        nombreValido(5);
+        nombreValido("Hola Mundo");
+        nombreValido("David González");
+
+        //Respuesta
+        const nombreValido2 = (cadena = "") => {
+            if (!cadena) return console.warn("Has de introducir un valor.");
+            if (typeof cadena != "string") return console.warn("Has de introducir una cadena de texto.");
+
+            cadena = cadena.toLocaleLowerCase();
+            let expReg = /^[a-zñáéíóúü\s]+$/g.test(cadena);
+            return (expReg)
+            ? console.info(`La cadena ${cadena} SI es un nombre válido`)
+            : console.info(`La cadena ${cadena} NO es un nombre válido`);
+        }
+        nombreValido2();
+        nombreValido2(5);
+        nombreValido2("Hola Mundo");
+        nombreValido2("David González");
+
+
+
+        // 20) Programa una función que valide que un texto sea un email válido, pe. miFuncion("jonmircha@gmail.com") devolverá verdadero.
+        const emailValido = (cadena = undefined) => {
+            if (!cadena) return console.warn("Has de introducir un valor.");
+            if (typeof cadena != "string") return console.warn("Has de introducir una cadena de texto.");
+
+            const regEmailValido = /[a-z]@[a-z]\.[a-z]{2,}/; //mal, no supe crear Expresión Regular
+            cadena = cadena.toLocaleLowerCase();
+            (regEmailValido.test(cadena))
+            ? console.info(`La cadena ${cadena} sí es un email válido`)
+            : console.warn(`La cadena ${cadena} no es un email válido`);
+            
+            
+        }
+
+        emailValido();
+        emailValido(5);
+        emailValido("Hola Mundo");
+        emailValido("david.gonzalez@grupougarte.es");
+
+        //Respuesta
+        const emailValido2 = (email = "") => {
+            if (!email) return console.warn("Has de introducir un valor.");
+            if (typeof email != "string") return console.warn("Has de introducir una cadena de texto.");
+
+            email = email.toLocaleLowerCase();
+            let expReg = /[a-z0-9]+(\.[_a-z0-9]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,15})/i.test(email);
+            return (expReg)
+            ? console.info(`La cadena ${email} SI es un email válido`)
+            : console.info(`La cadena ${email} NO es un email válido`);
+        }
+        emailValido2();
+        emailValido2(5);
+        emailValido2("Hola Mundo");
+        emailValido2("david.gonzalez@grupougarte.es");
+
+        //Fusión 19 y 20
+        const validarPatron = (cadena = "", patron = undefined) => {
+            if (!cadena) return console.warn("Has de introducir un valor.");
+            if (typeof cadena != "string") return console.warn("Has de introducir una cadena de texto.");
+
+            if (!patron) return console.warn("Has de introducir un patrón.");
+            if (!patron instanceof RegExp) return console.warn("Has de introducir un patrón válido.");
+
+            
+            return (patron.test(cadena))
+            ? console.info(`La cadena ${cadena} concuerda con el patrón`)
+            : console.info(`La cadena ${cadena} NO concuerda con el patrón`);
+        }
+
+        validarPatron("david.gonzalez@grupougarte.es",/^[_a-z0-9]+(\.[_a-z0-9]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,15})/i)
+        validarPatron("David González",/[A-Za-zÁÉÍÓÚáéíóú\s]+$/g)
+        validarPatron("david.gonzalez@grupougarte.es",new RegExp("^[_a-z0-9]+(\.[_a-z0-9]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,15})","i"))
+
+        
+
+
+
+        
         
     </script>
 </body>
