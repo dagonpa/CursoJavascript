@@ -7,7 +7,7 @@
 </head>
 <body>
     <script>
-        // 21) Programa una función que dado un array numérico devuelve otro array con los números elevados al cuadrado, pe. mi_funcion([1, 4, 5]) devolverá [1, 16, 25].
+        // 21) Programa una funciÃ³n que dado un array numÃ©rico devuelve otro array con los nÃºmeros elevados al cuadrado, pe. mi_funcion([1, 4, 5]) devolverÃ¡ [1, 16, 25].
         const cuadradoArray = (vector) => {
             if (!vector) return console.warn("No has introducido nada");
             if (!(vector instanceof Array)) return console.warn("Has de introducir un array.");
@@ -15,7 +15,7 @@
             let vectorResultado = [];
             let contador = 0;
             vector.forEach(function (element) {
-                if (typeof element !== "number") return console.warn("El vector tiene valores no numéricos.");
+                if (typeof element !== "number") return console.warn("El vector tiene valores no numÃ©ricos.");
                 vectorResultado[contador] = element * element;
                 contador++;
             });
@@ -34,10 +34,10 @@
         const devolverCuadros = (arreglo = undefined) => {
             if (!arreglo) return console.warn("No has introducido nada");
             if (!(arreglo instanceof Array)) return console.warn("Has de introducir un array.");
-            if (arreglo.length === 0) return console.warn("El arreglo está vacío");
+            if (arreglo.length === 0) return console.warn("El arreglo estÃ¡ vacÃ­o");
 
             for (const numero of arreglo) {
-                if (typeof numero != "number") return console.warn("El vector tiene valores no numéricos.");
+                if (typeof numero != "number") return console.warn("El vector tiene valores no numÃ©ricos.");
             }
 
             const nuevoArreglo = arreglo.map(el => el * el);
@@ -52,20 +52,20 @@
 
 
 
-        // 22) Programa una función que dado un array devuelva el número mas alto y el más bajo de dicho array, pe. miFuncion([1, 4, 5, 99, -60]) devolverá [99, -60].
+        // 22) Programa una funciÃ³n que dado un array devuelva el nÃºmero mas alto y el mÃ¡s bajo de dicho array, pe. miFuncion([1, 4, 5, 99, -60]) devolverÃ¡ [99, -60].
         const extremosArray = (vector = [] ) => {
             if (!vector) return console.warn("No has introducido nada");
             if (!vector instanceof Array) return console.warn("Has de introducir un array.");
 
             let maximo = undefined, minimo = undefined;
             vector.forEach(function (element) {
-                if (typeof element != "number") return console.warn("El vector tiene valores no numéricos.");
+                if (typeof element != "number") return console.warn("El vector tiene valores no numÃ©ricos.");
                 if (element>maximo || maximo===undefined) maximo = element;
                 if (element<minimo || minimo===undefined) minimo = element;
                 
             });
 
-            console.info(`Valor máximo: ${maximo} ; mínimo: ${minimo} `);
+            console.info(`Valor mÃ¡ximo: ${maximo} ; mÃ­nimo: ${minimo} `);
         }
 
         extremosArray([2,8,5]);
@@ -75,13 +75,13 @@
         const arrayMinMax = (arreglo = undefined) => {
             if (!arreglo) return console.warn("No has introducido nada");
             if (!(arreglo instanceof Array)) return console.warn("Has de introducir un array.");
-            if (arreglo.length === 0) return console.warn("El arreglo está vacío");
+            if (arreglo.length === 0) return console.warn("El arreglo estÃ¡ vacÃ­o");
 
             for (const numero of arreglo) {
-                if (typeof numero != "number") return console.warn("El vector tiene valores no numéricos.");
+                if (typeof numero != "number") return console.warn("El vector tiene valores no numÃ©ricos.");
             }
 
-            console.info(`Valor máximo: ${Math.max(...arreglo)} \nValor mínimo: ${Math.min(...arreglo)} `);
+            console.info(`Valor mÃ¡ximo: ${Math.max(...arreglo)} \nValor mÃ­nimo: ${Math.min(...arreglo)} `);
         }
         arrayMinMax([2,"texto2"]);
         arrayMinMax();
@@ -89,14 +89,14 @@
         arrayMinMax([14,-5,20,0]);
 
 
-        // 23) Programa una función que dado un array de números devuelva un objeto con 2 arreglos en el primero almacena los números pares y en el segundo los impares, pe. miFuncion([1,2,3,4,5,6,7,8,9,0]) devolverá {pares: [2,4,6,8,0], impares: [1,3,5,7,9]}.
+        // 23) Programa una funciÃ³n que dado un array de nÃºmeros devuelva un objeto con 2 arreglos en el primero almacena los nÃºmeros pares y en el segundo los impares, pe. miFuncion([1,2,3,4,5,6,7,8,9,0]) devolverÃ¡ {pares: [2,4,6,8,0], impares: [1,3,5,7,9]}.
         const paresImparesArray = (vector) => {
             if (!vector) return console.warn("No has introducido nada");
             if (!(vector instanceof Array)) return console.warn("Has de introducir un array.");
 
             let vectorResultadoPares = [], vectorResultadoImpares = [];
             vector.forEach(function (element) {
-                if (typeof element != "number") return console.warn("El vector tiene valores no numéricos.");
+                if (typeof element != "number") return console.warn("El vector tiene valores no numÃ©ricos.");
                 (element % 2 === 0)
                     ? vectorResultadoPares.push(element)
                     : vectorResultadoImpares.push(element)
@@ -117,10 +117,10 @@
         const separarParesImpares = (arreglo = undefined) => {
             if (!arreglo) return console.warn("No has introducido nada");
             if (!(arreglo instanceof Array)) return console.warn("Has de introducir un array.");
-            if (arreglo.length === 0) return console.warn("El arreglo está vacío");
+            if (arreglo.length === 0) return console.warn("El arreglo estÃ¡ vacÃ­o");
 
             for (const numero of arreglo) {
-                if (typeof numero != "number") return console.warn("El vector tiene valores no numéricos.");
+                if (typeof numero != "number") return console.warn("El vector tiene valores no numÃ©ricos.");
             }
 
             return console.info({

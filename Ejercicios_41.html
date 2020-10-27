@@ -7,9 +7,116 @@
 </head>
 <body>
     <script>
-    // 24) Programa una funci�n que dado un arreglo de n�meros devuelva un objeto con dos arreglos, el primero tendr� los numeros ordenados en forma ascendente y el segundo de forma descendiente, pe. miFuncion([7, 5,7,8,6]) devolver� { asc: [5,6,7,7,8], desc: [8,7,7,6,5] }.
-    // 25) Programa una funci�n que dado un arreglo de elementos, elimine los duplicados, pe. miFuncion(["x", 10, "x", 2, "10", 10, true, true]) devolver� ["x", 10, 2, "10", true].
-    // 26) Programa una funci�n que dado un arreglo de n�meros obtenga el promedio, pe. promedio([9,8,7,6,5,4,3,2,1,0]) devolver� 4.5.
+    // 24) Programa una función que dado un arreglo de números devuelva un objeto con dos arreglos, el primero tendrá los numeros ordenados en forma ascendente y el segundo de forma descendiente, pe. miFuncion([7, 5,7,8,6]) devolverá { asc: [5,6,7,7,8], desc: [8,7,7,6,5] }.
+    const arrayAscendenteDescendente = (vector = undefined) => {
+        if (!vector) return console.warn("No has introducido nada");
+        if (!(vector instanceof Array)) return console.warn("Has de introducir un array.");
+
+        for (const numero of vector) {
+            if (typeof numero != "number") return console.warn("El vector tiene valores no numéricos.");
+        }
+
+        const vetorascendente = vector.slice(), vetordescendente = vector.slice();
+        vetorascendente.sort((a,b) => a-b);
+        vetordescendente.sort((a,b) => b-a);
+
+        return {vetorascendente, vetordescendente};
+    }
+
+    console.log(arrayAscendenteDescendente([1,93,-12,36]));
+
+    //Resultado
+    const ordenarArreglo = (arreglo = undefined) => {
+        if (!arreglo) return console.warn("No has introducido nada");
+        if (!(arreglo instanceof Array)) return console.warn("Has de introducir un array.");
+        if (arreglo.length === 0) return console.warn("El arreglo está vacio");
+        for (const numero of arreglo) {
+            if (typeof numero != "number") return console.warn("El vector tiene valores no numÃ©ricos.");
+        }
+
+        return console.info({
+            arreglo,
+            asc: arreglo.map(el => el).sort(),
+            desc:arreglo.map(el => el).sort().reverse()
+        });
+    } 
+    ordenarArreglo([5,6,7,7,8]);
+
+    
+    // 25) Programa una función que dado un arreglo de elementos, elimine los duplicados, pe. miFuncion(["x", 10, "x", 2, "10", 10, true, true]) devolverá ["x", 10, 2, "10", true].
+    const borraDuplicadosArray = (vector = undefined) => {
+        if (!vector) return console.warn("No has introducido nada");
+        if (!(vector instanceof Array)) return console.warn("Has de introducir un array.");
+
+        let x=0;
+        for (let element of vector) {
+            if (vector.indexOf(element,x+1)!==-1) vector[x]="";
+            x++;
+        }
+        const resultado = vector.filter(element => element!="")
+
+        return resultado;
+    }
+
+    console.log(borraDuplicadosArray([1,93,-12,1,93,36,0]));
+    console.log(borraDuplicadosArray(["x", 10, "x", 2, "10", 10, true, true]));
+
+
+     //Resultado
+     const quitarDuplicados = (arreglo = undefined) => {
+        if (!arreglo) return console.warn("No has introducido nada");
+        if (!(arreglo instanceof Array)) return console.warn("Has de introducir un array.");
+        if (!arreglo.length >= 1) return console.warn("El arreglo está vacio o tiene solo un elemento");
+
+        return console.info({
+            arreglo,
+            sinDuplicadosFilter: arreglo.filter((value, index, self) => self.indexOf(value)===index),
+            sinDuplicadosSet: [...new Set(arreglo)]
+        });
+
+     }
+     quitarDuplicados(["x", 10, "x", 2, "10", 10, true, true]);
+
+    // 26) Programa una función que dado un arreglo de números obtenga el promedio, pe. promedio([9,8,7,6,5,4,3,2,1,0]) devolverá 4.5.
+    const arrayPromedio = (vector = undefined) => {
+        if (!vector) return console.warn("No has introducido nada");
+        if (!(vector instanceof Array)) return console.warn("Has de introducir un array.");
+        for (const numero of vector) {
+            if (typeof numero != "number") return console.warn("El vector tiene valores no numéricos.");
+        }
+
+        const reducer = (accumulator, currentValue) => accumulator + currentValue;
+        return vector.reduce(reducer)/vector.length;
+
+    }
+
+    console. log(arrayPromedio([9,8,7,6,5,4,3,2,1,0]));
+
+
+     //Resultado
+     const promedio = (arr = undefined) => {
+        if (!arr) return console.warn("No has introducido nada");
+        if (!(arr instanceof Array)) return console.warn("Has de introducir un array.");
+        if (arr.length === 0) return console.warn("El arreglo está vacio");
+        for (const numero of arr) {
+            if (typeof numero != "number") return console.warn("El vector tiene valores no numÃ©ricos.");
+        }
+
+        return console.info(
+            arr.reduce((total, num, index, arr) => {
+                total += num;
+                if (index === arr.length-1) {
+                    return `El promedio de ${arr.join(" + ")} es igual a ${total/arr.length}`
+                } else {
+                    return total;
+                }
+            })
+        )
+     }
+     promedio([9,8,7,6,5,4,3,2,1,0]);
+
+
+
     </script>
 </body>
 </html>
