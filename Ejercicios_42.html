@@ -9,26 +9,147 @@
     <script>
     // 27) Programa una clase llamada Pelicula.
 
-    // La clase recibir· un objeto al momento de instanciarse con los siguentes datos: id de la pelÌcula en IMDB, titulo, director, aÒo de estreno, paÌs o paÌses de origen, gÈneros y calificaciÛn en IMBD.
+    // La clase recibir√° un objeto al momento de instanciarse con los siguentes datos: id de la pel√≠cula en IMDB, titulo, director, a√±o de estreno, pa√≠s o pa√≠ses de origen, g√©neros y calificaci√≥n en IMBD.
     // - Todos los datos del objeto son obligatorios.
     // - Valida que el id IMDB tenga 9 caracteres, los primeros 2 sean letras y los 
-    //     7 restantes n˙meros.
-    // - Valida que el tÌtulo no rebase los 100 caracteres.
+    //     7 restantes n√∫meros.
+    // - Valida que el t√≠tulo no rebase los 100 caracteres.
     // - Valida que el director no rebase los 50 caracteres.
-    // - Valida que el aÒo de estreno sea un n˙mero entero de 4 dÌgitos.
-    // - Valida que el paÌs o paises sea introducidos en forma de arreglo.
-    // - Valida que los gÈneros sean introducidos en forma de arreglo.
-    // - Valida que los gÈneros introducidos esten dentro de los gÈneros 
+    // - Valida que el a√±o de estreno sea un n√∫mero entero de 4 d√≠gitos.
+    // - Valida que el pa√≠s o paises sea introducidos en forma de arreglo.
+    // - Valida que los g√©neros sean introducidos en forma de arreglo.
+    // - Valida que los g√©neros introducidos esten dentro de los g√©neros 
     //     aceptados*.
-    // - Crea un mÈtodo est·tico que devuelva los gÈneros aceptados*.
-    // - Valida que la calificaciÛn sea un n˙mero entre 0 y 10 pudiendo ser 
-    //     decimal de una posiciÛn.
-    // - Crea un mÈtodo que devuelva toda la ficha tÈcnica de la pelÌcula.
-    // - Apartir de un arreglo con la informaciÛn de 3 pelÌculas genera 3 
-    //     instancias de la clase de forma automatizada e imprime la ficha tÈcnica 
-    //     de cada pelÌcula.
+    // - Crea un m√©todo est√°tico que devuelva los g√©neros aceptados*.
+    // - Valida que la calificaci√≥n sea un n√∫mero entre 0 y 10 pudiendo ser 
+    //     decimal de una posici√≥n.
+    // - Crea un m√©todo que devuelva toda la ficha t√©cnica de la pel√≠cula.
+    // - Apartir de un arreglo con la informaci√≥n de 3 pel√≠culas genera 3 
+    //     instancias de la clase de forma automatizada e imprime la ficha t√©cnica 
+    //     de cada pel√≠cula.
 
-    // * GÈneros Aceptados: Action, Adult, Adventure, Animation, Biography, Comedy, Crime, Documentary ,Drama, Family, Fantasy, Film Noir, Game-Show, History, Horror, Musical, Music, Mystery, News, Reality-TV, Romance, Sci-Fi, Short, Sport, Talk-Show, Thriller, War, Western.
+    // * G√©neros Aceptados: Action, Adult, Adventure, Animation, Biography, Comedy, Crime, Documentary ,Drama, Family, Fantasy, Film Noir, Game-Show, History, Horror, Musical, Music, Mystery, News, Reality-TV, Romance, Sci-Fi, Short, Sport, Talk-Show, Thriller, War, Western.
+
+    class Pelicula{
+        constructor({id, titulo, director, anoestreno, pais, generos, calificacion}){
+            this.id = id;
+            this.titulo = titulo;
+            this.director = director;
+            this.anoestreno = anoestreno;
+            this.pais = pais;
+            this.generos = generos;
+            this.calificacion = calificacion;
+
+            const generosAceptados = ['Action', 'Adult', 'Adventure', 'Animation', 'Biography', 'Comedy', 'Crime', 'Documentary' ,'Drama', 'Family', 'Fantasy', 'Film Noir', 'Game-Show', 'History', 'Horror', 'Musical', 'Music', 'Mystery', 'News', 'Reality-TV', 'Romance', 'Sci-Fi', 'Short', 'Sport', 'Talk-Show', 'Thriller', 'War', 'Western'];
+
+            if (id===undefined) return console.warn("Ha de indicarse un id");
+            if (titulo===undefined) return console.warn("Ha de indicarse un titulo");
+            if (director===undefined) return console.warn("Ha de indicarse un director");
+            if (anoestreno===undefined) return console.warn("Ha de indicarse un a√±o de estreno");
+            if (pais===undefined) return console.warn("Ha de indicarse un pais");
+            if (generos===undefined) return console.warn("Ha de indicarse un g√©nero");
+            if (calificacion===undefined) return console.warn("Ha de indicarse una calificaci√≥n");
+
+            if (!/[A-Za-z]{2}[0-9]{7}/.test(id)) return console.warn("El ID han de ser 2 letras + 7 n√∫meros");
+            if (titulo.length>100) return console.warn("El t√≠tulo ha de ser de 100 caracteres m√°ximo");
+            if (titulo.length>50) return console.warn("El director ha de ser de 50 caracteres m√°ximo");
+            if (!/[0-9]{4}/.test(anoestreno)) return console.warn("El a√±o de estreno han de ser 4 cifras");
+            if (!pais instanceof Array) return console.warn("El pais o paises ha de indicarse mediante un arreglo");
+            if (!generos instanceof Array) return console.warn("El g√©nero o g√©neros ha de indicarse mediante un arreglo");
+            // if (generos.foreach(elem => )) return console.warn(`El listado de g√©neros admitidos es el siguiente: ${generosAceptados}`);
+            if (!/(\d{1})+(\.\d{2})?|\.\d{2}/.test(calificacion)) return console.warn("Ha de indicarse una calificaci√≥n de 0 a 10 con un decimal");
+
+     
+            generos.forEach(
+                element => {
+                    if (generosAceptados.indexOf(element)===-1) {
+                        console.warn(`G√©nero "${element}" desconocido`);
+                        return;
+                    }
+           
+                }
+            )
+      
+        }
+
+        get getGeneros(){
+            return this.generos;
+        }
+
+        get getFichaTecnica(){
+
+            let fichaTecnica = `Id : ${this.id}\n`;
+            fichaTecnica += `T√≠tulo : ${this.titulo}\n`;
+            fichaTecnica += `Director : ${this.director}\n`;
+            fichaTecnica += `A√±o estreno : ${this.anoestreno}\n`;
+            fichaTecnica += `Pa√≠s : ${this.pais}\n`;
+            fichaTecnica += `G√©neros : ${this.generos.join(' - ')}\n`;
+            fichaTecnica += `Calificaci√≥n : ${this.calificacion}\n`;
+
+            return fichaTecnica;
+        }
+
+        get getPelicula(){
+            return {id, titulo, director, anoestreno, pais, generos, calificacion}
+        }
+
+    }
+
+    const elPadrino = new Pelicula({
+        id:"EP0000001",
+        titulo:"El Padrino",
+        director:"Scorsese",
+        anoestreno:1972,
+        pais:["Estados Unidos"],
+        generos:["Crime","Drama","Film Noir"],
+        calificacion:19.98
+    });
+    
+    console.log(elPadrino);
+    console.log(elPadrino.getGeneros);
+    console.log(elPadrino.getFichaTecnica);
+
+    const tresPeliculas = [
+        {
+            id:"EP0000001",
+            titulo:"El Padrino",
+            director:"Scorsese",
+            anoestreno:1972,
+            pais:["Estados Unidos"],
+            generos:["Crime","Drama","Film Noir"],
+            calificacion:9
+        },
+        {
+            id:"EP0000002",
+            titulo:"El Padrino II",
+            director:"Scorsese",
+            anoestreno:1972,
+            pais:["Estados Unidos"],
+            generos:["Crime","Drama","Film Noir"],
+            calificacion:8.9
+        },
+        {
+            id:"EP0000003",
+            titulo:"El Padrino III",
+            director:"Scorsese",
+            anoestreno:1990,
+            pais:["Estados Unidos"],
+            generos:["Crime","Drama","Film Noir"],
+            calificacion:7.8
+        }
+    ];
+
+    for (const pelicula of tresPeliculas) {
+        const instanciaPelicula = new Pelicula(pelicula);
+        console.log(instanciaPelicula.getFichaTecnica) 
+    }
+
+    //Respuesta
+    
+    
+
+    
+
 
 
     </script>
