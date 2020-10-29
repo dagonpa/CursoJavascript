@@ -30,7 +30,7 @@
 
     // * Géneros Aceptados: Action, Adult, Adventure, Animation, Biography, Comedy, Crime, Documentary ,Drama, Family, Fantasy, Film Noir, Game-Show, History, Horror, Musical, Music, Mystery, News, Reality-TV, Romance, Sci-Fi, Short, Sport, Talk-Show, Thriller, War, Western.
 
-    class Pelicula{
+    class Film{
         constructor({id, titulo, director, anoestreno, pais, generos, calificacion}){
             this.id = id;
             this.titulo = titulo;
@@ -95,7 +95,7 @@
 
     }
 
-    const elPadrino = new Pelicula({
+    const elPadrino = new Film({
         id:"EP0000001",
         titulo:"El Padrino",
         director:"Scorsese",
@@ -105,9 +105,9 @@
         calificacion:19.98
     });
     
-    console.log(elPadrino);
-    console.log(elPadrino.getGeneros);
-    console.log(elPadrino.getFichaTecnica);
+    // console.log(elPadrino);
+    // console.log(elPadrino.getGeneros);
+    // console.log(elPadrino.getFichaTecnica);
 
     const tresPeliculas = [
         {
@@ -140,13 +140,160 @@
     ];
 
     for (const pelicula of tresPeliculas) {
-        const instanciaPelicula = new Pelicula(pelicula);
-        console.log(instanciaPelicula.getFichaTecnica) 
+        const instanciaPelicula = new Film(pelicula);
+        // console.log(instanciaPelicula.getFichaTecnica) 
     }
 
     //Respuesta
-    
-    
+
+    class Pelicula {
+        constructor({id, titulo, director, anoestreno, pais, generos, calificacion}){
+            this.id = id;
+            this.titulo = titulo;
+            this.director = director;
+            this.anoestreno = anoestreno;
+            this.pais = pais;
+            this.generos = generos;
+            this.calificacion = calificacion;
+
+            this.validarIMDB(id);
+            this.validarTitulo(titulo);
+            this.validarDirector(director);
+            this.validarEstreno(anoestreno);
+            this.validarPais(pais);
+            this.validarGeneros(generos);
+            this.validarCalificacion(calificacion);
+        }
+
+        static get listaGeneros(){
+            return ['Action', 'Adult', 'Adventure', 'Animation', 'Biography', 'Comedy', 'Crime', 'Documentary' ,'Drama', 'Family', 'Fantasy', 'Film Noir', 'Game-Show', 'History', 'Horror', 'Musical', 'Music', 'Mystery', 'News', 'Reality-TV', 'Romance', 'Sci-Fi', 'Short', 'Sport', 'Talk-Show', 'Thriller', 'War', 'Western'];
+        }
+        static generosAceptados(){
+            console.log(`El listado de géneros aceptados es: ${Pelicula.listaGeneros.join(", ")}`);
+        }
+
+        validarCadena(propiedad,valor){
+            if (!valor) return console.warn(`${propiedad } "${valor}" está vacío`);
+            if (typeof valor !== "string") return console.warn(`${propiedad } "${valor}" NO es una cadena de texto`);
+            return true;
+        }
+
+        validarArreglo(propiedad,valor){
+            if (!valor) return console.warn(`${propiedad } "${valor}" está vacío`);
+            if (!valor instanceof Array) return console.warn(`${propiedad } "${valor}" NO es un arreglo`);
+            for (const cadena of valor) {
+                if (typeof cadena !== "string") return console.warn(`El valor ${cadena} ingresado no es una cadena de texto`);
+            }
+            return true;
+        }
+
+        validarLongitudCadena(propiedad,valor,longitud){
+            if (valor.length>longitud) return console.error(`${propiedad} "${valor}" excede el número de caracteres permitidos (${longitud})`);
+            return true;
+        }
+
+        validarNumero(propiedad,valor){
+            if (!valor) return console.warn(`${propiedad } "${valor}" está vacío`);
+            if (typeof valor !== "number") return console.warn(`${propiedad } "${valor}" NO es una número`);
+            return true;
+        }
+
+        validarIMDB(id){
+            if (this.validarCadena("IMDB Id",id))
+                if (!/^([a-z]){2}([0-9]){7}$/.test(id))
+                    return console.error(`IMDB Id "${id}" no es válido, debe tener 2 caracteres de texto en minúscula + 7 caracteres numéricos`);
+        }
+
+        validarTitulo(titulo){
+            if (this.validarCadena("Título",titulo))
+                this.validarLongitudCadena("Título",titulo,100);
+        }
+        
+        validarDirector(director){
+            if (this.validarCadena("Director",director))
+                this.validarLongitudCadena("Director",director,50);
+        }
+
+        validarEstreno(anoestreno){
+            if (this.validarNumero("Año estreno",anoestreno))
+                if (!/^([0-9]){4}$/.test(anoestreno))
+                    return console.error(`Año de estreno "${anoestreno}" no es válido, debe ser un número de 4 caracteres`);
+        }
+
+        validarPais(pais){
+             this.validarArreglo("País",pais);
+        }
+
+        validarGeneros(generos){
+            if (this.validarArreglo("Géneros",generos)){
+                for (const genero of generos) {
+                    if (!Pelicula.listaGeneros.includes(genero)){
+                        console.error(`El genero ${genero} no se incluye entre los genero disponibles`)
+                        Pelicula.generosAceptados();
+                    } 
+                }
+            }            
+        }
+
+        validarCalificacion(calificacion){
+            if (this.validarNumero("Calñificación",calificacion))
+                return (calificacion<0 || calificacion>10)
+                    ? console.error('La calificación debe estar entre 0 y 10') 
+                    : this.calificacion = calificacion.toFixed(1);
+               
+        }
+
+        fichaTecnica(){
+                console.log(`Ficha Técnica\nTítulo : ${this.titulo}\nDirector : ${this.director}\nAño estreno : ${this.anoestreno}\nPaís : ${this.pais.join(' - ')}\nGéneros : ${this.generos.join(', ')}\nCalificación : ${this.calificacion}\nIMDB Id : ${this.id}\n`);
+
+        }
+      
+
+    }
+
+    const peli = new Pelicula({
+        id: "tt1234567",
+        titulo: "Rocky",
+        director: "quiensabe",
+        anoestreno: 1920,
+        pais: ["México","Francia"],
+        generos:  ["Sci-Fi","Comedy"],
+        calificacion: 9.34
+    });
+
+    peli.fichaTecnica();
+
+    const misPelis = [
+        {
+            id:"ep0000001",
+            titulo:"El Padrino",
+            director:"Scorsese",
+            anoestreno:1972,
+            pais:["Estados Unidos"],
+            generos:["Crime","Drama","Film Noir"],
+            calificacion:9
+        },
+        {
+            id:"ep0000002",
+            titulo:"El Padrino II",
+            director:"Scorsese",
+            anoestreno:1972,
+            pais:["Estados Unidos"],
+            generos:["Crime","Drama","Film Noir"],
+            calificacion:8.9
+        },
+        {
+            id:"ep0000003",
+            titulo:"El Padrino III",
+            director:"Scorsese",
+            anoestreno:1990,
+            pais:["Estados Unidos"],
+            generos:["Crime","Drama","Film Noir"],
+            calificacion:7.8
+        }
+    ];
+
+    misPelis.forEach(elem => new Pelicula(elem).fichaTecnica())
 
     
 
