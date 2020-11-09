@@ -32,7 +32,7 @@ img{
     height: auto;
 }
 
-/* *********** MenÃº Hamburguesa *********** */
+/* *********** Menú Hamburguesa *********** */
 
 .header{
     position: sticky;
@@ -115,4 +115,10 @@ h1{
     font-weight: bold;
     color: var(--second-color);
     background-color: var(--main-modal-color);
+}
+
+/* *********** Reloj Y Alarma *********** */
+p{
+    margin: 0 auto;
+    text-align: center;
 }
